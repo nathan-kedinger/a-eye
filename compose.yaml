@@ -1,0 +1,49 @@
+services:
+  backend:
+    build:
+      context: .
+    container_name: symfony-backend-a-eye
+    ports:
+      - "8052:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - database
+
+  frontend:
+    build:
+      context: ./front
+    container_name: vue-frontend-a-eye
+    ports:
+      - "5002:5173"
+    volumes:
+      - ./front:/home/node/app
+    depends_on:
+      - backend
+
+  database:
+    image: mariadb:11.5
+    container_name: mariadb-db-a-eye
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: app_test
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3352:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  ###> symfony/mailer ###php -
+  mailer:
+    image: axllent/mailpit
+    ports:
+      - "1025"
+      - "8025"
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+###< symfony/mailer ###
+
+volumes:
+  db_data:
