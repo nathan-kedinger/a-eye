@@ -5,35 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3caa3752-0294-4c86-ad76-6dd3028cd3c2" name="Changes" comment="Logique de création et d'envoi d'un message&#10;Amélioration du rendu&#10;Affichage de la dernière conversation d'un utilisateur">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1c441e38-93c0-47d1-9075-82e709ab43be.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1c441e38-93c0-47d1-9075-82e709ab43be/storage_v2/_src_/schema/app_test.8K-bRQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1c441e38-93c0-47d1-9075-82e709ab43be/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a201250b-9f6d-4a35-82f9-2ee629bffa5b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a201250b-9f6d-4a35-82f9-2ee629bffa5b.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/layouts/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/layouts/Header.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/modules/Rob/type/Rob.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/Rob/type/Rob.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/modules/chat/ChatComponent.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/modules/chat/ChatWindow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/chat/ChatWindow.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/modules/chat/store/ChatStore.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/modules/conversations/ConversationList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/conversations/ConversationList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/modules/conversations/type/Conversation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/conversations/type/Conversation.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/modules/firebase/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/firebase/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/modules/firebase/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/firebase/Register.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/modules/firebase/SignIn.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/firebase/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/modules/message/type/Message.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/message/type/Message.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/router/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/router/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/utils/constants/navbarPagesList.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/utils/constants/navbarPagesList.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/utils/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/utils/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/modules/conversations/api/Conversation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/conversations/api/Conversation.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/views/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/views/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/views/TestPage.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFixtures/ConversationFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/ConversationFixtures.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFixtures/MessageFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/MessageFixtures.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Conversation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Conversation.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Message.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Message.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Rob.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Rob.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/State/ConversationProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/State/ConversationProvider.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -309,11 +288,24 @@
       <workItem from="1736767445758" duration="26174000" />
       <workItem from="1736851520034" duration="18334000" />
       <workItem from="1736927913581" duration="22750000" />
-      <workItem from="1737013815480" duration="707000" />
+      <workItem from="1737013815480" duration="24781000" />
     </task>
+    <task id="LOCAL-00001" summary="Logique de création et d'envoi d'un message&#10;Amélioration du rendu&#10;Affichage de la dernière conversation d'un utilisateur">
+      <option name="closed" value="true" />
+      <created>1737016908250</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1737016908250</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Logique de création et d'envoi d'un message&#10;Amélioration du rendu&#10;Affichage de la dernière conversation d'un utilisateur" />
+    <option name="LAST_COMMIT_MESSAGE" value="Logique de création et d'envoi d'un message&#10;Amélioration du rendu&#10;Affichage de la dernière conversation d'un utilisateur" />
   </component>
 </project>

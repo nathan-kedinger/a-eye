@@ -29,6 +29,10 @@ class Rob
     ])]
     private ?int $id = null;
 
+    #[Groups([
+        self::GET_COLLECTION,
+        Conversation::GET
+    ])]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 

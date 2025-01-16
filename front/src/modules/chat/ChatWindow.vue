@@ -6,35 +6,36 @@ import Card from "../../components/utils/cards/Card.vue";
 import CardBody from '../../components/utils/cards/CardBody.vue';
 import {InformationCircleIcon, MinusIcon, UserCircleIcon, PaperAirplaneIcon} from "@heroicons/vue/24/outline"
 import type {Conversation} from "../conversations/type/Conversation";
-import {getConversation} from "../conversations/api/Conversation";
+import {getConversation, getLatestConversation} from "../conversations/api/Conversation";
 import {postMessage} from "../message/api/Message.ts";
 console.log('test')
 const windowOpen = defineModel<boolean>()
 const messageBody = ref<string>("")
 const messages = ref<Message[]>([])
 
-const conversation = ref<Conversation>(1)
-const conversationId = ref<number>()
+const conversation = ref<Conversation | null>(null)
 const isLoading = ref(false)
 
 const props = defineProps({
   selectedConversation: {
+    type: Object as () => Conversation,
     required: true
   },
   selectedRob: {
+    type: Number,
     required: true
   }
 });
 
 onBeforeMount(async () => {
-
+  conversation.value = await getLatestConversation(props.selectedRob)
+  messages.value = conversation.value.messages
   isLoading.value = true
   isLoading.value = false
 })
 
 watch(() => props.selectedConversation,async (newValue: Conversation) => {
   conversation.value = await getConversation(newValue.id)
-  conversationId.value = conversation.value.id
   messages.value = conversation.value.messages
 });
 
@@ -43,23 +44,25 @@ const closeWindow = () => {
 }
 
 const submitMessage = async (messageContent: string) => {
-  const message = {
-    content: messageContent,
-    sentByHuman: true,
-    readed: false,
-    timeStamp: new Date().toISOString(),
-    conversation: conversation.value["@id"],
-    rob: conversation.value.rob
-  }
-  messages.value.push(message)
-  try {
-    await postMessage(message)
-  } catch (e) {
-    console.error("Erreur lors de l'envoi du message : ", e)
-  } finally {
-    messageBody.value = ""
-    conversation.value = await getConversation(conversationId.value)
-    messages.value = conversation.value.messages
+  if(conversation.value){
+    const message = {
+      content: messageContent,
+      sentByHuman: true,
+      readed: false,
+      timeStamp: new Date().toISOString(),
+      conversation: conversation.value["@id"],
+      rob: conversation.value.rob
+    }
+    messages.value.push(message)
+    try {
+      await postMessage(message)
+    } catch (e) {
+      console.error("Erreur lors de l'envoi du message : ", e)
+    } finally {
+      messageBody.value = ""
+      conversation.value = await getConversation(conversation.value.id)
+      messages.value = conversation.value.messages
+    }
   }
 }
 </script>
@@ -68,7 +71,7 @@ const submitMessage = async (messageContent: string) => {
   <Card class="w-auto h-full flex flex-col">
     <!-- Titre fixé en haut -->
     <CardTitle class="flex items-center justify-between border-b border-gray-200 p-4">
-      <h1 class="text-lg font-semibold">Chat avec {{ conversation.title }}</h1>
+      <h1 class="text-lg font-semibold">Chat with {{ conversation?.rob.name }} | Conversation : {{ conversation?.title}}</h1>
       <div class="flex items-center gap-2">
         <!-- Icône d'information pour afficher la description -->
         <span class="tooltip tooltip-bottom" :data-tip="conversation?.description">

@@ -11,9 +11,9 @@ import CardBody from "../components/utils/cards/CardBody.vue";
 import Card from "../components/utils/cards/Card.vue";
 import type {Rob} from "../modules/Rob/type/Rob";
 import {getRobsCollection} from "../modules/Rob/api/Rob";
-
+import { BeakerIcon } from '@heroicons/vue/24/solid'
 const selectedConversation = ref<Conversation>()
-const selectedRob = ref<number>()
+const selectedRob = ref<number>(0)
 const robsList = ref<Rob[]>([]);
 const dynamicCssRobList = ref<string>("grid grid-cols-4 col-span-12")
 const windowOpen = ref<boolean>(false);
@@ -60,6 +60,27 @@ const handleSpeakButton = (robId : number) => {
       <!-- Conditionne la dimension des cols lorsque le chat est ouvert -->
       <div :class="windowOpen ? 'grid grid-cols-1 col-span-3' : 'grid grid-cols-4 col-span-12'" class="h-screen overflow-y-auto pt-10 ">
         <!-- Cette Partie -->
+
+        <Card
+            class="m-4 flex items-center gap-x-4 text-xs"
+        >
+          <figure>
+            <img src="https://cdn.pixabay.com/photo/2016/12/21/17/11/signe-1923369_1280.png">
+          </figure>
+          <CardBody>
+            <CardTitle>
+              <h2>New rob</h2>
+            </CardTitle>
+            <p>Click here to create a new chatbot.</p>
+            <CardAction class="justify-end">
+              <button onclick="my_modal_1.showModal()" class="btn bg-blue-800">+</button>
+              <button class="btn bg-blue-800">
+                +
+              </button>
+              <button class="btn">open modal</button>
+            </CardAction>
+          </CardBody>
+        </Card>
         <Card
             class="m-4 flex items-center gap-x-4 text-xs"
             v-for="rob in robsList"
@@ -74,8 +95,8 @@ const handleSpeakButton = (robId : number) => {
             </CardTitle>
             <p>{{ rob.description }}</p>
             <CardAction class="justify-end">
-              <button class="btn btn-primary" @click="handleSpeakButton(rob.id)">{{rob.id}}</button>
-              <button class="btn btn-primary">
+              <button class="btn bg-blue-800" @click="handleSpeakButton(rob.id)"><BeakerIcon class="size-6 text-blue-500"/></button>
+              <button class="btn bg-blue-800">
                 <RouterLink :to="`/rob-profiles/${rob.id}`">Voir profil</RouterLink>
               </button>
             </CardAction>
@@ -83,6 +104,18 @@ const handleSpeakButton = (robId : number) => {
         </Card>
       </div>
     </div>
+  <dialog id="my_modal_1" class="modal">
+    <div class="modal-box">
+      <h3 class="text-lg font-bold">Hello!</h3>
+      <p class="py-4">Press ESC key or click the button below to close</p>
+      <div class="modal-action">
+        <form method="dialog">
+          <!-- if there is a button in form, it will close the modal -->
+          <button class="btn">Close</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
 </template>
 
 

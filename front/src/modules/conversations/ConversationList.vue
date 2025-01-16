@@ -3,8 +3,9 @@ import {onBeforeMount, ref, watch} from "vue";
 import {getConversationsList} from "./api/Conversation";
 import type {Conversation} from "./type/Conversation";
 
-const conversationsList = ref<Conversation[]>()
 
+const conversationsList = ref<Conversation[]>()
+const lastUpdateConversation = ref<Conversation>()
 const props = defineProps({
       robConversations: {
         require: true
@@ -12,24 +13,17 @@ const props = defineProps({
     })
 
 const emit = defineEmits<(event: "conversation", conversation: Conversation) => void>();
-const loadConversationList = async () => {
-  conversationsList.value = await getConversationsList(props.robConversations)
-
-  console.log(conversationsList.value)
-
-  // TODO Ajouter un last update pour trier les conversations
-  conversationsList.value.sort((a, b) => {
-    const dateA = new Date(a.lastUpdate);
-    const dateB = new Date(b.lastUpdate);
-    return dateA.getTime() - dateB.getTime();
-  });
+const loadConversationList = async (robIdForConversations: number) => {
+  conversationsList.value = await getConversationsList(robIdForConversations)
+  lastUpdateConversation.value = conversationsList.value[0]
 }
 onBeforeMount(async () => {
-  await loadConversationList()
+  await loadConversationList(props.robConversations)
 })
 
 watch(() => props.robConversations,async (newVal) => {
   conversationsList.value = await getConversationsList(newVal)
+
 });
 const handleConversationClick = (conversation : Conversation) => {
   emit("conversation", conversation)

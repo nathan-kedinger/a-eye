@@ -38,9 +38,12 @@ class ConversationProvider implements ProviderInterface
 
         try {
             if ($operation->getName() === self::OPERATION_COLLECTION) {
-
                 $robId = $context['filters']['rob.id'] ?? null;
-                return $conversationRepository->findBy(['user' => $user, 'rob' => $robId]);
+
+                return $conversationRepository->findBy(
+                    ['user' => $user, 'rob' => $robId],
+                    ['lastUpdate' => 'DESC']
+                );
             }
 
             //$robId = $uriVariables['rob']['id'] ?? null;

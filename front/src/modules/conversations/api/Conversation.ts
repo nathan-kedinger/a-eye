@@ -5,6 +5,10 @@ export const getConversation = async (conversationId: number): Promise<Conversat
     return await ApiResource.getItem(`conversations/${conversationId}`)
 }
 
+export const getLatestConversation = async (robId: number): Promise<Conversation> => {
+    return await ApiResource.getItem(`conversation/last-modified/${robId}`)
+}
+
 export const getConversationsList = async (robId: number): Promise<Conversation[]> => {
     return await ApiResource.getCollection(`conversations?rob.id=${robId}`)
 }
