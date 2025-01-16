@@ -9,6 +9,7 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use App\Repository\MessageRepository;
 use App\State\MessageListProvider;
+use App\State\MessageProcessor;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\SerializedName;
@@ -17,7 +18,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
 #[ORM\Entity(repositoryClass: MessageRepository::class)]
 //#[GetCollection(provider: MessageListProvider::class)]
 #[GetCollection(normalizationContext: ['groups' => [self::GET_COLLECTION]])]
-#[Post(denormalizationContext: ['groups' => [self::POST]], provider: )]
+#[Post(denormalizationContext: ['groups' => [self::POST]], processor: MessageProcessor::class)]
 #[ApiResource]
 #[ApiFilter(SearchFilter::class, properties: [
     'conversation'     => 'exact',
@@ -42,6 +43,7 @@ class Message
     #[Groups([
         self::GET_COLLECTION,
         Conversation::GET,
+        self::POST
     ])]
     private ?string $content = null;
 
@@ -50,7 +52,8 @@ class Message
     #[Groups([
         self::GET_COLLECTION,
         Conversation::GET,
-        Conversation::GET_COLLECTION
+        Conversation::GET_COLLECTION,
+        self::POST
     ])]
     private ?User $userMessage = null;
 
@@ -66,7 +69,8 @@ class Message
     #[Groups([
         self::GET_COLLECTION,
         Conversation::GET,
-        Conversation::GET_COLLECTION
+        Conversation::GET_COLLECTION,
+        self::POST
     ])]
     private ?Rob $rob = null;
 
@@ -74,6 +78,7 @@ class Message
     #[ORM\JoinColumn(nullable: false)]
     #[Groups([
         self::GET_COLLECTION,
+        self::POST
     ])]
     private ?Conversation $conversation = null;
 
@@ -81,17 +86,19 @@ class Message
     #[Groups([
         self::GET_COLLECTION,
         Conversation::GET,
-        Conversation::GET_COLLECTION
+        Conversation::GET_COLLECTION,
+        self::POST
     ])]
-    private ?bool $readed = null;
+    private ?bool $readed = false;
 
     #[ORM\Column]
     #[Groups([
         self::GET_COLLECTION,
         Conversation::GET,
-        Conversation::GET_COLLECTION
+        Conversation::GET_COLLECTION,
+        self::POST
     ])]
-    private ?bool $sentByHuman = null;
+    private ?bool $sentByHuman = false;
 
     public function getId(): ?int
     {

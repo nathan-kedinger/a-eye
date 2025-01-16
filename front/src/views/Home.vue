@@ -16,7 +16,7 @@ const selectedConversation = ref<Conversation>()
 const selectedRob = ref<number>()
 const robsList = ref<Rob[]>([]);
 const dynamicCssRobList = ref<string>("grid grid-cols-4 col-span-12")
-
+const windowOpen = ref<boolean>(false);
 const pictures = [
   "https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp",
   "https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp",
@@ -36,44 +36,58 @@ const handleSelectedConversation = (conversation: Conversation) => {
   selectedConversation.value = conversation
 }
 const handleSpeakButton = (robId : number) => {
+  windowOpen.value = true
   selectedRob.value = robId
   dynamicCssRobList.value = "grid grid-cols-1 cols-span-4"
 }
 </script>
 
 <template>
-  <div class="grid grid-cols-12">
-    <div v-if="selectedRob" class="col-span-8 grid grid-cols-8">
-      <ConversationList :robConversations="selectedRob" @conversation="handleSelectedConversation" class="col-span-3"/>
-      <ChatWindow :selectedConversation="selectedConversation" class="col-span-5 "/>
+    <div class="grid grid-cols-12">
+      <div v-if="windowOpen" class="col-span-9 grid grid-cols-8 h-screen overflow-y-auto">
+        <ConversationList
+            :robConversations="selectedRob"
+            @conversation="handleSelectedConversation"
+            class="col-span-3 h-svh overflow-y-auto "
+        />
+        <ChatWindow
+            v-model="windowOpen"
+            :selectedRob="selectedRob"
+            :selectedConversation="selectedConversation"
+            class="col-span-5 h-svh overflow-y-auto"
+        />
+      </div>
+      <!-- Conditionne la dimension des cols lorsque le chat est ouvert -->
+      <div :class="windowOpen ? 'grid grid-cols-1 col-span-3' : 'grid grid-cols-4 col-span-12'" class="h-screen overflow-y-auto pt-10 ">
+        <!-- Cette Partie -->
+        <Card
+            class="m-4 flex items-center gap-x-4 text-xs"
+            v-for="rob in robsList"
+            :key="rob.id"
+        >
+          <figure>
+            <Carousel v-model="pictures" />
+          </figure>
+          <CardBody>
+            <CardTitle>
+              <h2>{{ rob.name }}</h2>
+            </CardTitle>
+            <p>{{ rob.description }}</p>
+            <CardAction class="justify-end">
+              <button class="btn btn-primary" @click="handleSpeakButton(rob.id)">{{rob.id}}</button>
+              <button class="btn btn-primary">
+                <RouterLink :to="`/rob-profiles/${rob.id}`">Voir profil</RouterLink>
+              </button>
+            </CardAction>
+          </CardBody>
+        </Card>
+      </div>
     </div>
-    <!-- TODO conditionner la dimension des cols lorsque le chat est ouvert -->
-    <div :class="dynamicCssRobList">
-      <Card
-          class="m-4 flex items-center gap-x-4 text-xs"
-          v-for="rob in robsList"
-          :key="rob.id"
-      >
-        <figure>
-          <Carousel v-model="pictures" />
-        </figure>
-        <CardBody>
-          <CardTitle>
-            <h2>{{ rob.name }}</h2>
-          </CardTitle>
-          <p>{{ rob.description }}</p>
-          <CardAction class="justify-end">
-            <button class="btn btn-primary" @click="handleSpeakButton(rob.id)">{{rob.id}}</button>
-            <button class="btn btn-primary">
-              <RouterLink :to="`/rob-profiles/${rob.id}`">Voir profil</RouterLink>
-            </button>
-          </CardAction>
-        </CardBody>
-      </Card>
-    </div>
-  </div>
 </template>
 
-<style scoped>
 
+<style scoped>
+.grid {
+  transition: all 2.9s ease-in-out;
+}
 </style>

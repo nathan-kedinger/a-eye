@@ -4,7 +4,6 @@ import {ref} from "vue";
 import {useAuth} from "vue-auth3";
 import axios from "axios";
 import {useUserStore} from "../modules/security/store/userStore";
-import {getAuthenticatedUser} from "../modules/security/api/Authentication";
 
 const email = ref('')
 const password = ref('')
@@ -40,7 +39,6 @@ const login = () => {
         const token = response.data.token
         storeTokenInCookie(token);
         if (loginData.fetchUser) {
-          getAuthenticatedUser()
           //axios.get('http://localhost:8000/api/me')
               .then(userResponse => {
                 user.setUser(userResponse);

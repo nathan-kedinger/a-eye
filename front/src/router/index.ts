@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import SignIn from "../modules/firebase/SignIn.vue";
+import Login from "../modules/firebase/login.vue";
 import Register from "../modules/firebase/Register.vue";
 import Feed from "../modules/firebase/Feed.vue";
 import {getAuth, onAuthStateChanged, getIdToken} from "firebase/auth";
@@ -10,12 +10,15 @@ const routes = [
     {
         path: '/',
         name: 'Home',
-        component: Home
+        component: Home,
+        meta: {
+            requiresAuth: true
+        }
     },
     {
-        path: '/sign-in',
-        name: 'signIn',
-        component: SignIn
+        path: '/login',
+        name: 'login',
+        component: Login
     },
     {
         path: '/register',
@@ -61,7 +64,7 @@ router.beforeEach(async (to, from, next) => {
             next()
         } else {
             alert("You don't have access !")
-            next("/about")
+            next("/register")
         }
     }else {
         next()

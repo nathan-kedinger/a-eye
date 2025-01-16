@@ -4,7 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3caa3752-0294-4c86-ad76-6dd3028cd3c2" name="Changes" comment="" />
+    <list default="true" id="3caa3752-0294-4c86-ad76-6dd3028cd3c2" name="Changes" comment="Logique de création et d'envoi d'un message&#10;Amélioration du rendu&#10;Affichage de la dernière conversation d'un utilisateur">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1c441e38-93c0-47d1-9075-82e709ab43be.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1c441e38-93c0-47d1-9075-82e709ab43be/storage_v2/_src_/schema/app_test.8K-bRQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1c441e38-93c0-47d1-9075-82e709ab43be/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a201250b-9f6d-4a35-82f9-2ee629bffa5b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a201250b-9f6d-4a35-82f9-2ee629bffa5b.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/layouts/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/layouts/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/modules/Rob/type/Rob.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/Rob/type/Rob.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/modules/chat/ChatComponent.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/modules/chat/ChatWindow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/chat/ChatWindow.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/modules/chat/store/ChatStore.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/modules/conversations/ConversationList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/conversations/ConversationList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/modules/conversations/type/Conversation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/conversations/type/Conversation.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/modules/firebase/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/firebase/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/modules/firebase/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/firebase/Register.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/modules/firebase/SignIn.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/firebase/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/modules/message/type/Message.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/message/type/Message.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/router/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/router/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/utils/constants/navbarPagesList.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/utils/constants/navbarPagesList.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/utils/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/utils/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/views/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/views/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/views/TestPage.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataFixtures/ConversationFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/ConversationFixtures.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataFixtures/MessageFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/MessageFixtures.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Conversation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Conversation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Message.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Message.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,8 +52,50 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;nathan-kedinger&quot;
+  }
+}</component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="Message-implementation" />
+                    <option name="lastUsedInstant" value="1736852071" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1736852070" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/nathan-kedinger/a-eye&quot;,
+    &quot;accountId&quot;: &quot;ed0000ce-8fdf-4703-ae09-7f36dcd98885&quot;
+  }
+}</component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/opt/homebrew/Cellar/php/8.3.4/bin/php">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/symfony/mime" />
@@ -173,28 +245,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "last_opened_file_path": "/Users/lvgf6163/workspace/www/projets persos/a-eye/front/src",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "ts.external.directory.path": "/Users/lvgf6163/workspace/www/projets persos/a-eye/front/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Message-implementation&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/lvgf6163/workspace/www/projets persos/a-eye/front/src&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/lvgf6163/workspace/www/projets persos/a-eye/front/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mariadb"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mariadb&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/front/src" />
@@ -233,7 +306,10 @@
       <workItem from="1736418221792" duration="306000" />
       <workItem from="1736418533021" duration="14711000" />
       <workItem from="1736495715483" duration="20735000" />
-      <workItem from="1736767445758" duration="25346000" />
+      <workItem from="1736767445758" duration="26174000" />
+      <workItem from="1736851520034" duration="18334000" />
+      <workItem from="1736927913581" duration="22750000" />
+      <workItem from="1737013815480" duration="707000" />
     </task>
     <servers />
   </component>

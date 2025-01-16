@@ -15,11 +15,16 @@ class ConversationFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         // Créer plusieurs instances de Rob
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 100; $i++) {
             $conversation = new Conversation();
-            $conversation->setRob($this->getReference(RobFixtures::ROB_REFERENCE . $i, Rob::class));
-            $conversation->setUser($this->getReference(UserFixtures::USER_REFERENCE. rand(8, 11), User::class));
+            $conversation->setRob($this->getReference(RobFixtures::ROB_REFERENCE . rand(1, 10), Rob::class));
+            $conversation->setUser($this->getReference(UserFixtures::USER_REFERENCE. rand(11, 11), User::class));
             $conversation->setTitle('Title ' . $i);
+            $startTimestamp = strtotime('2020-01-01');
+            $endTimestamp = strtotime('2023-12-31');
+            $randomTimestamp = random_int($startTimestamp, $endTimestamp);
+            $randomDate = new \DateTimeImmutable(date('Y-m-d H:i:s', $randomTimestamp));
+            $conversation->setLastUpdate($randomDate);
             $conversation->setDescription('Description for conversation ' . $i);
             $this->addReference(self::CONVERSATION_REFERENCE. $i, $conversation);
 

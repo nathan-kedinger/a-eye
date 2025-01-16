@@ -29,8 +29,7 @@ const signInWithGoogle = () => {
   const provider = new GoogleAuthProvider();
   signInWithPopup(getAuth(), provider)
       .then((result) => {
-        console.log("resultat", result);
-        router.push("/feed");
+        router.push("/");
       })
       .catch((error) => {
         console.log(error.code);
@@ -41,11 +40,48 @@ const signInWithGoogle = () => {
 </script>
 
 <template>
-  <h1>Créer un compte</h1>
-  <p><input type="text" placeholder="Courriel" v-model="email" /></p>
-  <p><input type="password" placeholder="Mot de passe" v-model="password" /></p>
-  <button @click="register">S'inscrire</button>
-  <p><button @click="signInWithGoogle">Se connecter avec Google</button></p>
+  <div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="w-full max-w-md bg-white shadow-lg rounded-lg p-6">
+      <h1 class="text-2xl font-bold text-center text-gray-800 mb-4">
+        Créer un compte
+      </h1>
+      <div class="space-y-4">
+        <!-- Email Input -->
+        <div>
+          <input
+              type="text"
+              placeholder="Courriel"
+              v-model="email"
+              class="input input-bordered w-full"
+          />
+        </div>
+        <!-- Password Input -->
+        <div>
+          <input
+              type="password"
+              placeholder="Mot de passe"
+              v-model="password"
+              class="input input-bordered w-full"
+          />
+        </div>
+        <!-- Buttons -->
+        <div class="space-y-2">
+          <button
+              @click="register"
+              class="btn btn-primary w-full"
+          >
+            Register
+          </button>
+          <button
+              @click="signInWithGoogle"
+              class="btn btn-outline w-full"
+          >
+            Register with Google
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped></style>

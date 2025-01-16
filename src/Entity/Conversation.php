@@ -75,6 +75,13 @@ class Conversation
     #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'conversation')]
     private Collection $messages;
 
+    #[Groups([
+        self::GET_COLLECTION,
+        self::GET
+    ])]
+    #[ORM\Column]
+    private ?\DateTimeImmutable $lastUpdate = null;
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
@@ -159,6 +166,18 @@ class Conversation
                 $message->setConversation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLastUpdate(): ?\DateTimeImmutable
+    {
+        return $this->lastUpdate;
+    }
+
+    public function setLastUpdate(\DateTimeImmutable $lastUpdate): static
+    {
+        $this->lastUpdate = $lastUpdate;
 
         return $this;
     }

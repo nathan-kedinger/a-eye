@@ -54,7 +54,16 @@ export const ApiResource = {
         config?: AxiosRequestConfig<any>,
         errorHandled = true
     ): Promise<any> => {
-        return await handleResponseItem(axiosInstance.post(url, data, config), url, errorHandled)
+        // Ajoutez l'en-tête Content-Type
+        const headers = {
+            ...config?.headers,
+            'Content-Type': 'application/ld+json',
+        };
+        return await handleResponseItem(
+            axiosInstance.post(url, data, { ...config, headers }),
+            url,
+            errorHandled
+        );
     },
     // ---------------- PUT ITEM ----------------
     put: async (
