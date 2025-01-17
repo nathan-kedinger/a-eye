@@ -11,5 +11,5 @@ export interface Message {
     readed: boolean
     sentByHuman: boolean
     rob: Rob
-    conversation: Conversation
+    conversation: string
 }

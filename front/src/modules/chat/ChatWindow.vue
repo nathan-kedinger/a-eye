@@ -28,9 +28,9 @@ const props = defineProps({
 });
 
 onBeforeMount(async () => {
+  isLoading.value = true
   conversation.value = await getLatestConversation(props.selectedRob.id)
   messages.value = conversation.value.messages
-  isLoading.value = true
   isLoading.value = false
 })
 
@@ -46,29 +46,81 @@ const closeWindow = () => {
   windowOpen.value = false
 }
 
+const fetchChatGPTResponse = async (humanMessage: string): Promise<string> => {
+  const apiKey = import.meta.env.VITE_OPEN_API_KEY;
+  console.log('apiKey', apiKey)
+  console.log('meta',import.meta.env);
+  const apiUrl = 'https://api.openai.com/v1/chat/completions';
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: [
+          { role: 'system', content: 'You are a helpful assistant.' },
+          { role: 'user', content: humanMessage },
+        ],
+        max_tokens: 150,
+      }),
+    });
+
+    const data = await response.json();
+    return data.choices[0].message.content;
+  } catch (error) {
+    console.error('Erreur lors de l’appel à l’API ChatGPT :', error);
+    return 'Désolé, une erreur est survenue avec le bot.';
+  }
+};
+
+
 const submitMessage = async (messageContent: string) => {
-  console.log('conversation', conversation.value)
-  if(conversation.value){
-    const message = {
+  if (conversation.value) {
+    const humanMessage = {
       content: messageContent,
       sentByHuman: true,
       readed: false,
       timeStamp: new Date().toISOString(),
       conversation: conversation.value["@id"],
-      rob: props.selectedRob["@id"]
-    }
-    messages.value.push(message)
+      rob: props.selectedRob["@id"],
+    };
+
+    // Ajouter le message humain à la liste locale et sauvegarder en base
+    messages.value.push(humanMessage);
     try {
-      await postMessage(message)
+      await postMessage(humanMessage);
+
+      // Appeler l'API de ChatGPT pour obtenir la réponse
+      const chatGPTResponse = await fetchChatGPTResponse(messageContent);
+
+      // Préparer le message du bot
+      const botMessage = {
+        content: chatGPTResponse,
+        sentByHuman: false,
+        readed: false,
+        timeStamp: new Date().toISOString(),
+        conversation: conversation.value["@id"],
+        rob: props.selectedRob["@id"],
+      };
+
+      // Ajouter la réponse du bot à la liste locale et sauvegarder en base
+      messages.value.push(botMessage);
+      await postMessage(botMessage);
     } catch (e) {
-      console.error("Erreur lors de l'envoi du message : ", e)
+      console.error('Erreur lors de l’envoi du message ou de la réponse du bot : ', e);
     } finally {
-      messageBody.value = ""
-      conversation.value = await getConversation(conversation.value.id)
-      messages.value = conversation.value.messages
+      // Réinitialiser le champ d'entrée et mettre à jour la conversation
+      messageBody.value = '';
+      conversation.value = await getConversation(conversation.value.id);
+      messages.value = conversation.value.messages;
     }
   }
-}
+};
+
 </script>
 
 <template>

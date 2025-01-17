@@ -8,3 +8,7 @@ export const getRob = async (id: number): Promise<Rob> => {
 export const getRobsCollection = async (): Promise<Rob[]> => {
     return await ApiResource.getCollection('/robs')
 }
+
+export const postRob = async (rob: Rob): Promise<Rob> => {
+    return await ApiResource.post('/robs', rob)
+}

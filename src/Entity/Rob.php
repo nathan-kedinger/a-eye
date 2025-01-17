@@ -5,7 +5,9 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
 use App\Repository\RobRepository;
+use App\State\RobProcessor;
 use App\State\RobProvider;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,11 +17,13 @@ use Symfony\Component\Serializer\Attribute\Groups;
 #[ORM\Entity(repositoryClass: RobRepository::class)]
 #[Get(normalizationContext: ['groups' => [self::GET]])]
 #[GetCollection(normalizationContext: ['groups' => [self::GET_COLLECTION]], provider: RobProvider::class)]
+#[Post(denormalizationContext: ['groups' => [self::POST]], processor: RobProcessor::class)]
 #[ApiResource]
 class Rob
 {
     const string GET = "rob:get";
     const string GET_COLLECTION = "rob:get:collection";
+    const string POST = "rob:post";
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -31,11 +35,17 @@ class Rob
 
     #[Groups([
         self::GET_COLLECTION,
-        Conversation::GET
+        Conversation::GET,
+        self::POST
     ])]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[Groups([
+        self::GET_COLLECTION,
+        self::GET,
+        self::POST
+    ])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
@@ -51,6 +61,9 @@ class Rob
     #[ORM\OneToMany(targetEntity: Conversation::class, mappedBy: 'rob')]
     private Collection $conversations;
 
+    #[Groups([
+        self::POST
+    ])]
     #[ORM\ManyToOne(inversedBy: 'robs')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;

@@ -10,13 +10,19 @@ import CardAction from "../components/utils/cards/CardAction.vue";
 import CardBody from "../components/utils/cards/CardBody.vue";
 import Card from "../components/utils/cards/Card.vue";
 import type {Rob} from "../modules/Rob/type/Rob";
-import {getRobsCollection} from "../modules/Rob/api/Rob";
+import {getRobsCollection, postRob} from "../modules/Rob/api/Rob";
 import { IdentificationIcon, ChatBubbleLeftIcon } from '@heroicons/vue/24/solid'
+import {postConversation} from "../modules/conversations/api/Conversation.ts";
+
 const selectedConversation = ref<Conversation>()
 const selectedRob = ref<Rob>()
+const newRob = ref<Rob>()
 const robsList = ref<Rob[]>([]);
 const dynamicCssRobList = ref<string>("grid grid-cols-4 col-span-12")
 const windowOpen = ref<boolean>(false);
+const newRobName = ref<string>('')
+const newRobDescription = ref<string>('')
+
 const pictures = [
   "https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp",
   "https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp",
@@ -40,6 +46,23 @@ const handleSpeakButton = (rob : Rob) => {
   windowOpen.value = true
   selectedRob.value = rob
   dynamicCssRobList.value = "grid grid-cols-1 cols-span-4"
+}
+
+const handleCreateNewRob = async () => {
+  newRob.value = {
+    name: newRobName.value,
+    description: newRobDescription.value
+  }
+  await postRob(newRob.value).then((response) => {
+    newRob.value = response
+    postConversation({
+      title: "First conversation with " + newRob.value.name,
+      rob: newRob.value["@id"]
+    })
+  })
+
+  robsList.value = await getRobsCollection()
+
 }
 </script>
 
@@ -111,8 +134,15 @@ const handleSpeakButton = (rob : Rob) => {
       <p class="py-4">Press ESC key or click the button below to close</p>
       <div class="modal-action">
         <form method="dialog">
+          <label for="robName">Choose a name for this rob
+            <input name="robName" id="robName" v-model="newRobName">
+          </label>
+          <label for="robDescription">Wright some personalisation which will be used in each rob's conversation.
+            <input name="robDescription" id="robDescription" v-model="newRobDescription">
+          </label>
           <!-- if there is a button in form, it will close the modal -->
           <button class="btn">Close</button>
+          <button class="btn" @click="handleCreateNewRob">Create Rob</button>
         </form>
       </div>
     </div>

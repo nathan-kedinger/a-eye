@@ -7,10 +7,15 @@
     <list default="true" id="3caa3752-0294-4c86-ad76-6dd3028cd3c2" name="Changes" comment="Création d'une nouvelle conversation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/layouts/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/layouts/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/modules/Rob/api/Rob.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/Rob/api/Rob.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/modules/Rob/type/Rob.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/Rob/type/Rob.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/modules/chat/ChatWindow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/chat/ChatWindow.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/modules/conversations/ConversationList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/conversations/ConversationList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/modules/conversations/type/Conversation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/conversations/type/Conversation.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/modules/message/type/Message.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/message/type/Message.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/views/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Rob.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Rob.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/State/ConversationProcessor.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/State/ConversationProcessor.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +55,10 @@
             <RecentBranchesForRepo>
               <option name="branches">
                 <list>
+                  <RecentBranch>
+                    <option name="branchName" value="Create-rob" />
+                    <option name="lastUsedInstant" value="1737145613" />
+                  </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="create-new-conversation" />
                     <option name="lastUsedInstant" value="1737103383" />
@@ -226,29 +235,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;create-new-conversation&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/lvgf6163/workspace/www/projets persos/a-eye/front/src&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/lvgf6163/workspace/www/projets persos/a-eye/front/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "git-widget-placeholder": "Create-rob",
+    "last_opened_file_path": "/Users/lvgf6163/workspace/www/projets persos/a-eye/front/src",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/Users/lvgf6163/workspace/www/projets persos/a-eye/front/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mariadb&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mariadb"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/front/src" />

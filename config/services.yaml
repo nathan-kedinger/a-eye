@@ -32,13 +32,15 @@ services:
         arguments:
             $messageRepository: '@App\Repository\MessageRepository'
         tags: ['api_platform.state_provider']
-    # Configuration spécifique pour décorer le processeur
     App\State\ConversationProcessor:
         arguments:
             $persistProcessor: '@api_platform.doctrine.orm.state.persist_processor'
         tags: [ 'api_platform.state_processor' ]
-# Pas besoin de replaces ici avec l'autowiring
     App\State\MessageProcessor:
+        arguments:
+            $persistProcessor: '@api_platform.doctrine.orm.state.persist_processor'
+        tags: [ 'api_platform.state_processor' ]
+    App\State\RobProcessor:
         arguments:
             $persistProcessor: '@api_platform.doctrine.orm.state.persist_processor'
         tags: [ 'api_platform.state_processor' ]
