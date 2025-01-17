@@ -11,9 +11,9 @@ import CardBody from "../components/utils/cards/CardBody.vue";
 import Card from "../components/utils/cards/Card.vue";
 import type {Rob} from "../modules/Rob/type/Rob";
 import {getRobsCollection} from "../modules/Rob/api/Rob";
-import { BeakerIcon } from '@heroicons/vue/24/solid'
+import { IdentificationIcon, ChatBubbleLeftIcon } from '@heroicons/vue/24/solid'
 const selectedConversation = ref<Conversation>()
-const selectedRob = ref<number>(0)
+const selectedRob = ref<Rob>()
 const robsList = ref<Rob[]>([]);
 const dynamicCssRobList = ref<string>("grid grid-cols-4 col-span-12")
 const windowOpen = ref<boolean>(false);
@@ -35,9 +35,9 @@ onMounted(async () => {
 const handleSelectedConversation = (conversation: Conversation) => {
   selectedConversation.value = conversation
 }
-const handleSpeakButton = (robId : number) => {
+const handleSpeakButton = (rob : Rob) => {
   windowOpen.value = true
-  selectedRob.value = robId
+  selectedRob.value = rob
   dynamicCssRobList.value = "grid grid-cols-1 cols-span-4"
 }
 </script>
@@ -73,7 +73,7 @@ const handleSpeakButton = (robId : number) => {
             </CardTitle>
             <p>Click here to create a new chatbot.</p>
             <CardAction class="justify-end">
-              <button onclick="my_modal_1.showModal()" class="btn bg-blue-800">+</button>
+              <button onclick="new_bot.showModal()" class="btn bg-blue-800">+</button>
               <button class="btn bg-blue-800">
                 +
               </button>
@@ -95,8 +95,8 @@ const handleSpeakButton = (robId : number) => {
             </CardTitle>
             <p>{{ rob.description }}</p>
             <CardAction class="justify-end">
-              <button class="btn bg-blue-800" @click="handleSpeakButton(rob.id)"><BeakerIcon class="size-6 text-blue-500"/></button>
-              <button class="btn bg-blue-800">
+              <button class="btn " @click="handleSpeakButton(rob)"><ChatBubbleLeftIcon class="w-6 h-6 text-blue-500"/></button>
+              <button class="btn "><IdentificationIcon class="w-6 h-6 text-blue-500"/>
                 <RouterLink :to="`/rob-profiles/${rob.id}`">Voir profil</RouterLink>
               </button>
             </CardAction>
@@ -104,7 +104,7 @@ const handleSpeakButton = (robId : number) => {
         </Card>
       </div>
     </div>
-  <dialog id="my_modal_1" class="modal">
+  <dialog id="new_bot" class="modal">
     <div class="modal-box">
       <h3 class="text-lg font-bold">Hello!</h3>
       <p class="py-4">Press ESC key or click the button below to close</p>
@@ -120,7 +120,7 @@ const handleSpeakButton = (robId : number) => {
 
 
 <style scoped>
-.grid {
+.col-span-3 {
   transition: all 2.9s ease-in-out;
 }
 </style>

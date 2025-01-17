@@ -12,3 +12,7 @@ export const getLatestConversation = async (robId: number): Promise<Conversation
 export const getConversationsList = async (robId: number): Promise<Conversation[]> => {
     return await ApiResource.getCollection(`conversations?rob.id=${robId}`)
 }
+
+export const postConversation = async (conversation: Conversation): Promise<Conversation> => {
+    return await ApiResource.post('/conversations', conversation)
+}

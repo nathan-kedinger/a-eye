@@ -50,9 +50,9 @@ onMounted(() => {
   <RouterLink to="/" class="fixed top-2 left-2 z-50"><HomeIcon class="w-6 h-6"/></RouterLink>
   <RouterLink to="/login" class="avatar fixed top-2 end-2 z-50">
     <div class="w-12 rounded-full">
-<!--      <img
+      <img
           :src="isLoggedIn ? currentUserPicture! : 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'"
-          alt="Tailwind-CSS-Avatar-component" />-->
+          alt="Tailwind-CSS-Avatar-component" />
     </div>
   </RouterLink>
 

@@ -8,6 +8,7 @@ import {InformationCircleIcon, MinusIcon, UserCircleIcon, PaperAirplaneIcon} fro
 import type {Conversation} from "../conversations/type/Conversation";
 import {getConversation, getLatestConversation} from "../conversations/api/Conversation";
 import {postMessage} from "../message/api/Message.ts";
+import type {Rob} from "../Rob/type/Rob.ts";
 console.log('test')
 const windowOpen = defineModel<boolean>()
 const messageBody = ref<string>("")
@@ -22,13 +23,13 @@ const props = defineProps({
     required: true
   },
   selectedRob: {
-    type: Number,
+    type: Object as () => Rob,
     required: true
   }
 });
 
 onBeforeMount(async () => {
-  conversation.value = await getLatestConversation(props.selectedRob)
+  conversation.value = await getLatestConversation(props.selectedRob.id)
   messages.value = conversation.value.messages
   isLoading.value = true
   isLoading.value = false
@@ -44,6 +45,7 @@ const closeWindow = () => {
 }
 
 const submitMessage = async (messageContent: string) => {
+  console.log('conversation', conversation.value)
   if(conversation.value){
     const message = {
       content: messageContent,
@@ -51,7 +53,7 @@ const submitMessage = async (messageContent: string) => {
       readed: false,
       timeStamp: new Date().toISOString(),
       conversation: conversation.value["@id"],
-      rob: conversation.value.rob
+      rob: props.selectedRob["@id"]
     }
     messages.value.push(message)
     try {

@@ -6,8 +6,11 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
 use App\Repository\ConversationRepository;
+use App\State\ConversationProcessor;
 use App\State\ConversationProvider;
+use App\State\MessageProcessor;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -17,6 +20,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
 #[ORM\Entity(repositoryClass: ConversationRepository::class)]
 #[Get(normalizationContext: ['groups' => [self::GET]], provider: ConversationProvider::class )]
 #[GetCollection(normalizationContext: ['groups' => [self::GET_COLLECTION]], provider: ConversationProvider::class )]
+#[Post(denormalizationContext: ['groups' => [self::POST]], processor: ConversationProcessor::class)]
 #[ApiResource]
 #[ApiFilter(SearchFilter::class, properties: [
     'rob.id'     => 'exact',
@@ -25,6 +29,7 @@ class Conversation
 {
     const string GET_COLLECTION = 'conversation:get:collection';
     const string GET = 'conversation:get';
+    const string POST = 'conversation:post';
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -37,7 +42,8 @@ class Conversation
 
     #[Groups([
         self::GET_COLLECTION,
-        self::GET
+        self::GET,
+        self::POST
     ])]
     #[ORM\ManyToOne(inversedBy: 'conversations')]
     #[ORM\JoinColumn(nullable: false)]
@@ -45,7 +51,9 @@ class Conversation
 
     #[Groups([
         self::GET_COLLECTION,
-        self::GET
+        self::GET,
+        self::POST
+
     ])]
     #[ORM\ManyToOne(inversedBy: 'conversations')]
     #[ORM\JoinColumn(nullable: false)]
@@ -53,14 +61,18 @@ class Conversation
 
     #[Groups([
         self::GET_COLLECTION,
-        self::GET
+        self::GET,
+        self::POST
+
     ])]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     #[Groups([
         self::GET_COLLECTION,
-        self::GET
+        self::GET,
+        self::POST
+
     ])]
     #[ORM\Column(length: 255)]
     private ?string $title = null;
@@ -70,16 +82,20 @@ class Conversation
      */
     #[Groups([
         self::GET_COLLECTION,
-        self::GET
+        self::GET,
+        self::POST
+
     ])]
     #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'conversation')]
     private Collection $messages;
 
     #[Groups([
         self::GET_COLLECTION,
-        self::GET
+        self::GET,
+        self::POST
+
     ])]
-    #[ORM\Column]
+    #[ORM\Column(type: "datetime_immutable")]
     private ?\DateTimeImmutable $lastUpdate = null;
 
     public function __construct()
