@@ -9,7 +9,6 @@ import type {Conversation} from "../conversations/type/Conversation";
 import {getConversation, getLatestConversation} from "../conversations/api/Conversation";
 import {postMessage} from "../message/api/Message.ts";
 import type {Rob} from "../Rob/type/Rob.ts";
-console.log('test')
 const windowOpen = defineModel<boolean>()
 const messageBody = ref<string>("")
 const messages = ref<Message[]>([])
@@ -36,7 +35,10 @@ onBeforeMount(async () => {
 })
 
 watch(() => props.selectedConversation,async (newValue: Conversation) => {
+  console.log('newValue', newValue)
+  if(newValue.id)
   conversation.value = await getConversation(newValue.id)
+  //TODO Remplacer par une requête pour récupérer les messages de la conversation
   messages.value = conversation.value.messages
 });
 
@@ -123,7 +125,3 @@ const submitMessage = async (messageContent: string) => {
     </div>
   </Card>
 </template>
-
-
-<style scoped>
-</style>

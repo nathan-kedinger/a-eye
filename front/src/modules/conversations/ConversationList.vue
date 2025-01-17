@@ -5,7 +5,6 @@ import type {Conversation} from "./type/Conversation";
 import { PlusIcon } from '@heroicons/vue/24/solid'
 
 const conversationsList = ref<Conversation[]>()
-//const lastUpdateConversation = ref<Conversation>()
 const props = defineProps({
   robConversations: {
     require: true
@@ -13,25 +12,21 @@ const props = defineProps({
 })
 const newConversation = ref<Conversation>()
 const emit = defineEmits<(event: "conversation", conversation: Conversation) => void>();
-const loadConversationList = async (robIdForConversations: number) => {
-  console.log(props.robConversations.id)
+const loadConversationList = async () => {
   conversationsList.value = await getConversationsList(props.robConversations.id)
-  //lastUpdateConversation.value = conversationsList.value[0]
 }
 const newConversationTitle = ref<string>('')
-
-
-
-const createConversation = () => {
+const createConversation = async () => {
   newConversation.value = {
     title: newConversationTitle.value,
     rob: props.robConversations['@id']
   }
-  // Actualiser la liste des conversations
-  postConversation(newConversation.value)
+  await postConversation(newConversation.value).then((response) => {
+    newConversation.value = response
+  })
 }
 onBeforeMount(async () => {
-  await loadConversationList(props.robConversations.id)
+  await loadConversationList()
 })
 
 watch(() => props.robConversations.id,async (newVal) => {
@@ -41,10 +36,11 @@ const handleConversationClick = (conversation : Conversation) => {
   emit("conversation", conversation)
 }
 const handleCreateNewConversation = async () => {
-  createConversation()
-
-  await loadConversationList(props.robConversations.id)
-
+  await createConversation()
+  await loadConversationList()
+  if(newConversation.value){
+    emit("conversation", newConversation.value)
+  }
 }
 </script>
 
@@ -61,8 +57,10 @@ const handleCreateNewConversation = async () => {
       <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
       <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
         <li>
-          <button onclick="new_conversation.showModal()" class="btn bg-blue-800">           <PlusIcon class="w-6 h6"></PlusIcon>
-            New chat</button>
+          <button onclick="new_conversation.showModal()" class="btn bg-blue-800 mt-28 ">
+            <PlusIcon class="w-6 h6"></PlusIcon>
+            New chat
+          </button>
         </li>
         Sidebar content here
         <li @click="handleConversationClick(conversation)" v-for="conversation in conversationsList" :key="conversation.id">

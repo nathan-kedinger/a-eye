@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {navbarPagesList} from "../utils/constants/navbarPagesList";
 import { onMounted, ref } from "vue";
 import {getAuth, onAuthStateChanged, signOut} from "firebase/auth";
 import router from "../router";
@@ -47,7 +46,7 @@ onMounted(() => {
       <a class="btn btn-ghost text-xl" @click="handleSignOut" v-if="isLoggedIn">Sign out</a>
     </div>-->
 
-  <RouterLink to="/" class="fixed top-2 left-2 z-50"><HomeIcon class="w-6 h-6"/></RouterLink>
+  <RouterLink to="/" class="fixed top-5 left-5 z-50"><HomeIcon class="w-6 h-6"/></RouterLink>
   <RouterLink to="/login" class="avatar fixed top-2 end-2 z-50">
     <div class="w-12 rounded-full">
       <img

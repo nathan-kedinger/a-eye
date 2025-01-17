@@ -34,6 +34,7 @@ onMounted(async () => {
 
 const handleSelectedConversation = (conversation: Conversation) => {
   selectedConversation.value = conversation
+  console.log('selectedConversation', selectedConversation.value)
 }
 const handleSpeakButton = (rob : Rob) => {
   windowOpen.value = true
@@ -65,7 +66,7 @@ const handleSpeakButton = (rob : Rob) => {
             class="m-4 flex items-center gap-x-4 text-xs"
         >
           <figure>
-            <img src="https://cdn.pixabay.com/photo/2016/12/21/17/11/signe-1923369_1280.png">
+            <img src="https://cdn.pixabay.com/photo/2016/12/21/17/11/signe-1923369_1280.png" alt="Plus">
           </figure>
           <CardBody>
             <CardTitle>
