@@ -7,7 +7,7 @@ import CardBody from '../../components/utils/cards/CardBody.vue';
 import {InformationCircleIcon, MinusIcon, UserCircleIcon, PaperAirplaneIcon} from "@heroicons/vue/24/outline"
 import type {Conversation} from "../conversations/type/Conversation";
 import {getConversation, getLatestConversation} from "../conversations/api/Conversation";
-import {postMessage} from "../message/api/Message.ts";
+import {getMessages, postMessage} from "../message/api/Message.ts";
 import type {Rob} from "../Rob/type/Rob.ts";
 const windowOpen = defineModel<boolean>()
 const messageBody = ref<string>("")
@@ -29,54 +29,23 @@ const props = defineProps({
 
 onBeforeMount(async () => {
   isLoading.value = true
+  if(props.selectedRob.id)
   conversation.value = await getLatestConversation(props.selectedRob.id)
-  messages.value = conversation.value.messages
+  if(conversation.value && conversation.value.id)
+  messages.value = await getMessages(conversation.value.id)
   isLoading.value = false
 })
 
 watch(() => props.selectedConversation,async (newValue: Conversation) => {
-  console.log('newValue', newValue)
   if(newValue.id)
   conversation.value = await getConversation(newValue.id)
-  //TODO Remplacer par une requête pour récupérer les messages de la conversation
-  messages.value = conversation.value.messages
+  if(conversation.value && conversation.value.id)
+  messages.value = await getMessages(conversation.value.id)
 });
 
 const closeWindow = () => {
   windowOpen.value = false
 }
-
-const fetchChatGPTResponse = async (humanMessage: string): Promise<string> => {
-  const apiKey = import.meta.env.VITE_OPEN_API_KEY;
-  console.log('apiKey', apiKey)
-  console.log('meta',import.meta.env);
-  const apiUrl = 'https://api.openai.com/v1/chat/completions';
-
-  try {
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
-        messages: [
-          { role: 'system', content: 'You are a helpful assistant.' },
-          { role: 'user', content: humanMessage },
-        ],
-        max_tokens: 150,
-      }),
-    });
-
-    const data = await response.json();
-    return data.choices[0].message.content;
-  } catch (error) {
-    console.error('Erreur lors de l’appel à l’API ChatGPT :', error);
-    return 'Désolé, une erreur est survenue avec le bot.';
-  }
-};
-
 
 const submitMessage = async (messageContent: string) => {
   if (conversation.value) {
@@ -89,31 +58,12 @@ const submitMessage = async (messageContent: string) => {
       rob: props.selectedRob["@id"],
     };
 
-    // Ajouter le message humain à la liste locale et sauvegarder en base
     messages.value.push(humanMessage);
     try {
       await postMessage(humanMessage);
-
-      // Appeler l'API de ChatGPT pour obtenir la réponse
-      const chatGPTResponse = await fetchChatGPTResponse(messageContent);
-
-      // Préparer le message du bot
-      const botMessage = {
-        content: chatGPTResponse,
-        sentByHuman: false,
-        readed: false,
-        timeStamp: new Date().toISOString(),
-        conversation: conversation.value["@id"],
-        rob: props.selectedRob["@id"],
-      };
-
-      // Ajouter la réponse du bot à la liste locale et sauvegarder en base
-      messages.value.push(botMessage);
-      await postMessage(botMessage);
     } catch (e) {
-      console.error('Erreur lors de l’envoi du message ou de la réponse du bot : ', e);
+      console.error('Erreur lors de l’envoi du message :', e);
     } finally {
-      // Réinitialiser le champ d'entrée et mettre à jour la conversation
       messageBody.value = '';
       conversation.value = await getConversation(conversation.value.id);
       messages.value = conversation.value.messages;

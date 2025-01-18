@@ -8,6 +8,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use App\Repository\MessageRepository;
+use App\State\MessageListProvider;
 use App\State\MessageProcessor;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,7 +16,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: MessageRepository::class)]
 //#[GetCollection(provider: MessageListProvider::class)]
-#[GetCollection(normalizationContext: ['groups' => [self::GET_COLLECTION]])]
+#[GetCollection(normalizationContext: ['groups' => [self::GET_COLLECTION]], provider: MessageListProvider::class)]
 #[Post(denormalizationContext: ['groups' => [self::POST]], processor: MessageProcessor::class)]
 #[ApiResource]
 #[ApiFilter(SearchFilter::class, properties: [

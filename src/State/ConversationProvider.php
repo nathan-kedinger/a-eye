@@ -30,10 +30,9 @@ class ConversationProvider implements ProviderInterface
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): Conversation|array|null
     {
         $conversationRepository = $this->em->getRepository(Conversation::class);
-        //$robRepository = $this->em->getRepository(Rob::class);
         $user = $this->security->getUser();
         if (!$user instanceof User) {
-            throw new \RuntimeException('Authentified user is not an instance of App\Entity\User.');
+            throw new \RuntimeException('Authenticated user is not an instance of App\Entity\User.');
         }
 
         try {
@@ -45,42 +44,18 @@ class ConversationProvider implements ProviderInterface
                     ['lastUpdate' => 'DESC']
                 );
             }
-
-            //$robId = $uriVariables['rob']['id'] ?? null;
-            //if ($robId) {
-            /*                $rob = $robRepository->find($robId);
-                            if (!$rob) {
-                                throw new NotFoundHttpException('Rob not found.');
-                            }*/
-
-            // $isConversationExist = $conversationRepository->isConversationExists($user, $rob);
             if ($operation->getName() === self::OPERATION_GET) {
                 $conversationId = $uriVariables['id'] ?? null;
-                /*if (!$isConversationExist) {
-                    $conversation = new Conversation();
-                    $conversation->setUser($user);
-
-                    $conversation->setRob($rob);
-                    $conversation->setTitle('Discussion with Bot ' . $robId);
-                    $conversation->setDescription('Description of the chat');
-
-                    $this->em->persist($conversation);
-                    $this->em->flush();
-
-                } else {*/
-                // TODO Trier pour afficher la dernière conversation
                 $tpConversation = $conversationRepository->findOneBy(['id' => $conversationId]);
                 if ($tpConversation->getUser() === $user) {
                     return $tpConversation;
                 } else {
                     throw new InvalidArgumentException('You are not allowed to access this conversation.');
                 }
-                // }
             }
         } catch (\Exception $e) {
             throw new InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
-        //}
         return null;
     }
 }

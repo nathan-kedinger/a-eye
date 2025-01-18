@@ -4,18 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3caa3752-0294-4c86-ad76-6dd3028cd3c2" name="Changes" comment="Création d'une nouvelle conversation">
+    <list default="true" id="3caa3752-0294-4c86-ad76-6dd3028cd3c2" name="Changes" comment="Création d'un nouveau rob fonctionnel">
+      <change afterPath="$PROJECT_DIR$/src/Service/ChatGPTService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.local" beforeDir="false" afterPath="$PROJECT_DIR$/.env.local" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/modules/Rob/api/Rob.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/Rob/api/Rob.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/modules/Rob/type/Rob.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/Rob/type/Rob.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/modules/chat/ChatWindow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/chat/ChatWindow.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/modules/conversations/type/Conversation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/conversations/type/Conversation.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/modules/message/api/Message.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/message/api/Message.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/modules/message/type/Message.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/message/type/Message.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/views/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Rob.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Rob.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/State/ConversationProcessor.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/State/ConversationProcessor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Message.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Message.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/State/ConversationProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/State/ConversationProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/State/MessageListProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/State/MessageListProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/State/MessageProcessor.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/State/MessageProcessor.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -318,7 +319,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737128409379</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Création d'un nouveau rob fonctionnel">
+      <option name="closed" value="true" />
+      <created>1737151082766</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1737151082766</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,7 +347,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Logique de création et d'envoi d'un message&#10;Amélioration du rendu&#10;Affichage de la dernière conversation d'un utilisateur" />
     <MESSAGE value="Création d'une nouvelle conversation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Création d'une nouvelle conversation" />
+    <MESSAGE value="Création d'un nouveau rob fonctionnel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Création d'un nouveau rob fonctionnel" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
