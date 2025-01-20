@@ -31,8 +31,12 @@ onBeforeMount(async () => {
   isLoading.value = true
   if(props.selectedRob.id)
   conversation.value = await getLatestConversation(props.selectedRob.id)
-  if(conversation.value && conversation.value.id)
-  messages.value = await getMessages(conversation.value.id)
+  if(conversation.value && conversation.value.id) {
+    //Comportement dû à l'utilisation d'un controller dans le back plutôt qu'apiplatform
+    conversation.value["@id"] = "api/conversations/" + conversation.value?.id
+    console.log('conversation.value', conversation.value)
+    messages.value = await getMessages(conversation.value.id)
+  }
   isLoading.value = false
 })
 
@@ -48,7 +52,8 @@ const closeWindow = () => {
 }
 
 const submitMessage = async (messageContent: string) => {
-  if (conversation.value) {
+  if (conversation.value && conversation.value.id) {
+    console.log('conversation.value', conversation.value)
     const humanMessage = {
       content: messageContent,
       sentByHuman: true,
@@ -65,8 +70,9 @@ const submitMessage = async (messageContent: string) => {
       console.error('Erreur lors de l’envoi du message :', e);
     } finally {
       messageBody.value = '';
+      messages.value = await getMessages(conversation.value.id)
+      // TODO remplacer la ligne suivante par une méthode qui met à jour la conversation
       conversation.value = await getConversation(conversation.value.id);
-      messages.value = conversation.value.messages;
     }
   }
 };
@@ -77,7 +83,7 @@ const submitMessage = async (messageContent: string) => {
   <Card class="w-auto h-full flex flex-col">
     <!-- Titre fixé en haut -->
     <CardTitle class="flex items-center justify-between border-b border-gray-200 p-4">
-      <h1 class="text-lg font-semibold">Chat with {{ conversation?.rob.name }} | Conversation : {{ conversation?.title}}</h1>
+      <h1 class="text-lg font-semibold">Chat with {{ conversation?.rob?.name}} | Conversation : {{ conversation?.title}}</h1>
       <div class="flex items-center gap-2">
         <!-- Icône d'information pour afficher la description -->
         <span class="tooltip tooltip-bottom" :data-tip="conversation?.description">

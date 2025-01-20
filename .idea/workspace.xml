@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3caa3752-0294-4c86-ad76-6dd3028cd3c2" name="Changes" comment="Création d'un nouveau rob fonctionnel&#10;Envoi et reponse de message avec cahtgpt fonctionnel">
-      <change beforePath="$PROJECT_DIR$/.env.local" beforeDir="false" />
+    <list default="true" id="3caa3752-0294-4c86-ad76-6dd3028cd3c2" name="Changes" comment="fix">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/modules/chat/ChatWindow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/chat/ChatWindow.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/modules/message/type/Message.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/message/type/Message.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="Create-rob" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -237,7 +237,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "Create-rob",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "/Users/lvgf6163/workspace/www/projets persos/a-eye/front/src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -352,7 +352,8 @@
     <MESSAGE value="Création d'une nouvelle conversation" />
     <MESSAGE value="Création d'un nouveau rob fonctionnel" />
     <MESSAGE value="Création d'un nouveau rob fonctionnel&#10;Envoi et reponse de message avec cahtgpt fonctionnel" />
-    <option name="LAST_COMMIT_MESSAGE" value="Création d'un nouveau rob fonctionnel&#10;Envoi et reponse de message avec cahtgpt fonctionnel" />
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
