@@ -90,7 +90,7 @@ const submitMessage = async (messageContent: string) => {
           <InformationCircleIcon class="w-6 h-6 text-gray-400"/>
         </span>
         <!-- Bouton vers le profil de Rob -->
-        <RouterLink :to="`/rob-profiles/${props.selectedRob}`" class="btn btn-primary btn-sm">
+        <RouterLink :to="`/rob-profile/${props.selectedRob.id}`" class="btn btn-primary btn-sm">
           <UserCircleIcon class="w-6 h-6 text-white"/>
         </RouterLink>
         <button @click="closeWindow" class="text-gray-500 hover:text-gray-700">

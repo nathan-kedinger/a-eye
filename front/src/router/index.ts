@@ -5,6 +5,7 @@ import Register from "../modules/firebase/Register.vue";
 import Feed from "../modules/firebase/Feed.vue";
 import {getAuth, onAuthStateChanged, getIdToken} from "firebase/auth";
 import Home from "../views/Home.vue";
+import RobProfile from "../modules/Rob/RobProfile.vue";
 
 const routes = [
     {
@@ -29,6 +30,15 @@ const routes = [
         path: '/feed',
         name: 'feed',
         component: Feed,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/rob-profile/:robId',
+        name: 'robProfile',
+        component: RobProfile,
+        props: true,
         meta: {
             requiresAuth: true
         }

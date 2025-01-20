@@ -20,8 +20,9 @@ const newRob = ref<Rob>()
 const robsList = ref<Rob[]>([]);
 const dynamicCssRobList = ref<string>("grid grid-cols-4 col-span-12")
 const windowOpen = ref<boolean>(false);
-const newRobName = ref<string>('')
-const newRobDescription = ref<string>('')
+const newRobName = ref<string | null>('')
+const newRobDescription = ref<string | null>('')
+const isRobSelected = ref<boolean>(false)
 
 const pictures = [
   "https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp",
@@ -48,22 +49,45 @@ const handleSpeakButton = (rob : Rob) => {
   dynamicCssRobList.value = "grid grid-cols-1 cols-span-4"
 }
 
-const handleCreateNewRob = async () => {
-  newRob.value = {
-    name: newRobName.value,
-    description: newRobDescription.value
+const handleSelectedRob = (rob: Rob) => {
+  //DaisyUI modal
+  create_update_bot.showModal()
+  selectedRob.value = rob
+  console.log('selectedRob', selectedRob.value)
+  isRobSelected.value = true
+}
+
+const handleResetRob = () => {
+  newRobName.value = null
+  newRobDescription.value = null
+  selectedRob.value = undefined
+  isRobSelected.value = false
+  create_update_bot.close()
+}
+const handleCreateOrUpdateNewRob = async () => {
+  if(isRobSelected.value) {
+    console.log('update rob')
+    //await updateRob(newRob.value)
   }
-  await postRob(newRob.value).then((response) => {
-    newRob.value = response
-    postConversation({
-      title: "First conversation with " + newRob.value.name,
-      rob: newRob.value["@id"]
+  else {
+    newRob.value = {
+      name: newRobName.value,
+      description: newRobDescription.value
+    }
+    await postRob(newRob.value).then((response) => {
+      newRob.value = response
+      postConversation({
+        title: "First conversation with " + newRob.value.name,
+        rob: newRob.value["@id"]
+      })
     })
-  })
+  }
+
 
   robsList.value = await getRobsCollection()
-
 }
+
+
 </script>
 
 <template>
@@ -97,7 +121,7 @@ const handleCreateNewRob = async () => {
             </CardTitle>
             <p>Click here to create a new chatbot.</p>
             <CardAction class="justify-end">
-              <button onclick="new_bot.showModal()" class="btn bg-blue-800">+</button>
+              <button onclick="create_update_bot.showModal()" class="btn bg-blue-800">+</button>
               <button class="btn bg-blue-800">
                 +
               </button>
@@ -120,29 +144,42 @@ const handleCreateNewRob = async () => {
             <p>{{ rob.description }}</p>
             <CardAction class="justify-end">
               <button class="btn " @click="handleSpeakButton(rob)"><ChatBubbleLeftIcon class="w-6 h-6 text-blue-500"/></button>
-              <button class="btn "><IdentificationIcon class="w-6 h-6 text-blue-500"/>
-                <RouterLink :to="`/rob-profiles/${rob.id}`">Voir profil</RouterLink>
+              <button class="btn"
+                      @click="handleSelectedRob(rob)"
+              ><IdentificationIcon class="w-6 h-6 text-blue-500"/>
+<!--                <RouterLink
+                    :to="`rob-profile/${rob.id}`"
+                    :rob="rob">
+                  See profile
+                </RouterLink>-->
               </button>
             </CardAction>
           </CardBody>
         </Card>
       </div>
     </div>
-  <dialog id="new_bot" class="modal">
+  <dialog id="create_update_bot" class="modal">
     <div class="modal-box">
       <h3 class="text-lg font-bold">Hello!</h3>
       <p class="py-4">Press ESC key or click the button below to close</p>
       <div class="modal-action">
         <form method="dialog">
-          <label for="robName">Choose a name for this rob
-            <input name="robName" id="robName" v-model="newRobName">
+          <label
+              for="robName">Choose a name for this rob
+            <input :placeholder="selectedRob?.name ? selectedRob.name : 'The rob name'"
+                   name="robName"
+                   id="robName"
+                   v-model="newRobName">
           </label>
           <label for="robDescription">Wright some personalisation which will be used in each rob's conversation.
-            <input name="robDescription" id="robDescription" v-model="newRobDescription">
+            <input :placeholder="selectedRob?.description ? selectedRob.description : 'The rob description'"
+                   name="robDescription"
+                   id="robDescription"
+                   v-model="newRobDescription">
           </label>
           <!-- if there is a button in form, it will close the modal -->
-          <button class="btn">Close</button>
-          <button class="btn" @click="handleCreateNewRob">Create Rob</button>
+          <button class="btn" @click="handleResetRob">Close</button>
+          <button class="btn" @click="handleCreateOrUpdateNewRob">Create Rob</button>
         </form>
       </div>
     </div>

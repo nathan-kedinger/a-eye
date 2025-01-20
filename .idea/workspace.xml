@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3caa3752-0294-4c86-ad76-6dd3028cd3c2" name="Changes" comment="fix">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/firebase-auth.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/firebase-auth.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/front/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/modules/Rob/RobProfile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/Rob/RobProfile.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/modules/chat/ChatWindow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/chat/ChatWindow.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/modules/message/type/Message.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/modules/message/type/Message.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/router/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/router/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/views/Home.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +32,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Create-rob" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -48,6 +51,10 @@
             <RecentBranchesForRepo>
               <option name="branches">
                 <list>
+                  <RecentBranch>
+                    <option name="branchName" value="rob-profile" />
+                    <option name="lastUsedInstant" value="1737386831" />
+                  </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="Create-rob" />
                     <option name="lastUsedInstant" value="1737145613" />
@@ -237,7 +244,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "rob-profile",
     "last_opened_file_path": "/Users/lvgf6163/workspace/www/projets persos/a-eye/front/src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -297,6 +304,9 @@
       <workItem from="1736927913581" duration="22750000" />
       <workItem from="1737013815480" duration="24781000" />
       <workItem from="1737141108750" duration="3766000" />
+      <workItem from="1737361487081" duration="665000" />
+      <workItem from="1737363578909" duration="109000" />
+      <workItem from="1737386466192" duration="9284000" />
     </task>
     <task id="LOCAL-00001" summary="Logique de création et d'envoi d'un message&#10;Amélioration du rendu&#10;Affichage de la dernière conversation d'un utilisateur">
       <option name="closed" value="true" />
@@ -330,7 +340,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737234869011</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fix">
+      <option name="closed" value="true" />
+      <created>1737361512207</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1737361512207</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
