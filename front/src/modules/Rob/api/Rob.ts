@@ -12,3 +12,7 @@ export const getRobsCollection = async (): Promise<Rob[]> => {
 export const postRob = async (rob: Rob): Promise<Rob> => {
     return await ApiResource.post('/robs', rob)
 }
+
+export const patchRob = async (rob: Rob): Promise<Rob> => {
+    return await ApiResource.patch(`/robs/${rob.id}`, rob)
+}

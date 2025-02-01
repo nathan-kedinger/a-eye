@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use App\Repository\RobRepository;
 use App\State\RobProcessor;
@@ -18,12 +19,14 @@ use Symfony\Component\Serializer\Attribute\Groups;
 #[Get(normalizationContext: ['groups' => [self::GET]])]
 #[GetCollection(normalizationContext: ['groups' => [self::GET_COLLECTION]], provider: RobProvider::class)]
 #[Post(denormalizationContext: ['groups' => [self::POST]], processor: RobProcessor::class)]
+#[Patch(denormalizationContext: ['groups' =>[self::PATCH]], processor: RobProcessor::class)]
 #[ApiResource]
 class Rob
 {
     const string GET = "rob:get";
     const string GET_COLLECTION = "rob:get:collection";
     const string POST = "rob:post";
+    const string PATCH = "rob:patch";
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -36,7 +39,8 @@ class Rob
     #[Groups([
         self::GET_COLLECTION,
         Conversation::GET,
-        self::POST
+        self::POST,
+        self::PATCH
     ])]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
@@ -44,7 +48,9 @@ class Rob
     #[Groups([
         self::GET_COLLECTION,
         self::GET,
-        self::POST
+        self::POST,
+        self::PATCH
+
     ])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;

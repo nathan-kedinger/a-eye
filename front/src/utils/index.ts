@@ -81,7 +81,14 @@ export const ApiResource = {
         config?: AxiosRequestConfig<any>,
         errorHandled = true
     ): Promise<any> => {
-        return await handleResponseItem(axiosInstance.patch(url, data, config), url, errorHandled)
+        const headers = {
+            ...config?.headers,
+            'Content-Type': 'application/merge-patch+json',
+        };
+        return await handleResponseItem(
+            axiosInstance.patch(url, data, { ...config, headers }),
+            url,
+            errorHandled)
     },
     // --------------- DELETE ITEM ---------------
     delete: async (

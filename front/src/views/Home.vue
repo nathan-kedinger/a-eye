@@ -10,7 +10,7 @@ import CardAction from "../components/utils/cards/CardAction.vue";
 import CardBody from "../components/utils/cards/CardBody.vue";
 import Card from "../components/utils/cards/Card.vue";
 import type {Rob} from "../modules/Rob/type/Rob";
-import {getRobsCollection, postRob} from "../modules/Rob/api/Rob";
+import {getRobsCollection, patchRob, postRob} from "../modules/Rob/api/Rob";
 import { IdentificationIcon, ChatBubbleLeftIcon } from '@heroicons/vue/24/solid'
 import {postConversation} from "../modules/conversations/api/Conversation.ts";
 
@@ -65,11 +65,21 @@ const handleResetRob = () => {
   create_update_bot.close()
 }
 const handleCreateOrUpdateNewRob = async () => {
+  //TODO Gérer correctement la logique de création et de mise à jour d'un rob
   if(isRobSelected.value) {
-    console.log('update rob')
-    //await updateRob(newRob.value)
+    if (selectedRob.value){
+
+      console.log('update rob')
+      newRob.value = {
+        id: selectedRob.value.id,
+        name: newRobName.value ? newRobName.value : selectedRob.value.name,
+        description: newRobDescription.value ? newRobDescription.value : selectedRob.value.description
+      }
+      await patchRob(newRob.value)
+    }
   }
   else {
+    console.log('create rob')
     newRob.value = {
       name: newRobName.value,
       description: newRobDescription.value
@@ -84,6 +94,7 @@ const handleCreateOrUpdateNewRob = async () => {
   }
 
 
+
   robsList.value = await getRobsCollection()
 }
 
@@ -91,73 +102,73 @@ const handleCreateOrUpdateNewRob = async () => {
 </script>
 
 <template>
-    <div class="grid grid-cols-12">
-      <div v-if="windowOpen" class="col-span-9 grid grid-cols-8 h-screen overflow-y-auto">
-        <ConversationList
-            :robConversations="selectedRob"
-            @conversation="handleSelectedConversation"
-            class="col-span-3 h-svh overflow-y-auto "
-        />
-        <ChatWindow
-            v-model="windowOpen"
-            :selectedRob="selectedRob"
-            :selectedConversation="selectedConversation"
-            class="col-span-5 h-svh overflow-y-auto"
-        />
-      </div>
-      <!-- Conditionne la dimension des cols lorsque le chat est ouvert -->
-      <div :class="windowOpen ? 'grid grid-cols-1 col-span-3' : 'grid grid-cols-4 col-span-12'" class="h-screen overflow-y-auto pt-10 ">
-        <!-- Cette Partie -->
-
-        <Card
-            class="m-4 flex items-center gap-x-4 text-xs"
-        >
-          <figure>
-            <img src="https://cdn.pixabay.com/photo/2016/12/21/17/11/signe-1923369_1280.png" alt="Plus">
-          </figure>
-          <CardBody>
-            <CardTitle>
-              <h2>New rob</h2>
-            </CardTitle>
-            <p>Click here to create a new chatbot.</p>
-            <CardAction class="justify-end">
-              <button onclick="create_update_bot.showModal()" class="btn bg-blue-800">+</button>
-              <button class="btn bg-blue-800">
-                +
-              </button>
-              <button class="btn">open modal</button>
-            </CardAction>
-          </CardBody>
-        </Card>
-        <Card
-            class="m-4 flex items-center gap-x-4 text-xs"
-            v-for="rob in robsList"
-            :key="rob.id"
-        >
-          <figure>
-            <Carousel v-model="pictures" />
-          </figure>
-          <CardBody>
-            <CardTitle>
-              <h2>{{ rob.name }}</h2>
-            </CardTitle>
-            <p>{{ rob.description }}</p>
-            <CardAction class="justify-end">
-              <button class="btn " @click="handleSpeakButton(rob)"><ChatBubbleLeftIcon class="w-6 h-6 text-blue-500"/></button>
-              <button class="btn"
-                      @click="handleSelectedRob(rob)"
-              ><IdentificationIcon class="w-6 h-6 text-blue-500"/>
-<!--                <RouterLink
-                    :to="`rob-profile/${rob.id}`"
-                    :rob="rob">
-                  See profile
-                </RouterLink>-->
-              </button>
-            </CardAction>
-          </CardBody>
-        </Card>
-      </div>
+  <div class="grid grid-cols-12">
+    <div v-if="windowOpen" class="col-span-9 grid grid-cols-8 h-screen overflow-y-auto">
+      <ConversationList
+          :robConversations="selectedRob"
+          @conversation="handleSelectedConversation"
+          class="col-span-3 h-svh overflow-y-auto "
+      />
+      <ChatWindow
+          v-model="windowOpen"
+          :selectedRob="selectedRob"
+          :selectedConversation="selectedConversation"
+          class="col-span-5 h-svh overflow-y-auto"
+      />
     </div>
+    <!-- Conditionne la dimension des cols lorsque le chat est ouvert -->
+    <div :class="windowOpen ? 'grid grid-cols-1 col-span-3' : 'grid grid-cols-4 col-span-12'" class="h-screen overflow-y-auto pt-10 ">
+      <!-- Cette Partie -->
+
+      <Card
+          class="m-4 flex items-center gap-x-4 text-xs"
+      >
+        <figure>
+          <img src="https://cdn.pixabay.com/photo/2016/12/21/17/11/signe-1923369_1280.png" alt="Plus">
+        </figure>
+        <CardBody>
+          <CardTitle>
+            <h2>New rob</h2>
+          </CardTitle>
+          <p>Click here to create a new chatbot.</p>
+          <CardAction class="justify-end">
+            <button onclick="create_update_bot.showModal()" class="btn bg-blue-800">+</button>
+            <button class="btn bg-blue-800">
+              +
+            </button>
+            <button class="btn">open modal</button>
+          </CardAction>
+        </CardBody>
+      </Card>
+      <Card
+          class="m-4 flex items-center gap-x-4 text-xs"
+          v-for="rob in robsList"
+          :key="rob.id"
+      >
+        <figure>
+          <Carousel v-model="pictures" />
+        </figure>
+        <CardBody>
+          <CardTitle>
+            <h2>{{ rob.name }}</h2>
+          </CardTitle>
+          <p>{{ rob.description }}</p>
+          <CardAction class="justify-end">
+            <button class="btn " @click="handleSpeakButton(rob)"><ChatBubbleLeftIcon class="w-6 h-6 text-blue-500"/></button>
+            <button class="btn"
+                    @click="handleSelectedRob(rob)"
+            ><IdentificationIcon class="w-6 h-6 text-blue-500"/>
+              <!--                <RouterLink
+                                  :to="`rob-profile/${rob.id}`"
+                                  :rob="rob">
+                                See profile
+                              </RouterLink>-->
+            </button>
+          </CardAction>
+        </CardBody>
+      </Card>
+    </div>
+  </div>
   <dialog id="create_update_bot" class="modal">
     <div class="modal-box">
       <h3 class="text-lg font-bold">Hello!</h3>
