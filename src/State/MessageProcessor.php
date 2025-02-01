@@ -7,8 +7,12 @@ use ApiPlatform\State\ProcessorInterface;
 use App\Entity\Message;
 use App\Entity\User;
 use App\Service\ChatGPTService;
-use Dom\Entity;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 class MessageProcessor implements ProcessorInterface
 {
@@ -23,6 +27,13 @@ class MessageProcessor implements ProcessorInterface
         $this->chatGPTService = $chatGPTService;
     }
 
+    /**
+     * @throws TransportExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws ClientExceptionInterface
+     */
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): mixed
     {
         $user = $this->security->getUser();
@@ -39,7 +50,7 @@ class MessageProcessor implements ProcessorInterface
             $this->persistProcessor->process($data, $operation, $uriVariables, $context);
 
             // Obtenir une réponse de ChatGPT
-            $chatGPTResponse = $this->chatGPTService->getResponse($data->getContent());
+            $chatGPTResponse = $this->chatGPTService->getResponse($data->getContent(), $data->getConversation());
 
             // Créer le message du bot
             $botMessage = new Message();

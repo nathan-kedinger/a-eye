@@ -98,6 +98,9 @@ class Conversation
     #[ORM\Column(type: "datetime_immutable")]
     private ?\DateTimeImmutable $lastUpdate = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $context = null;
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
@@ -194,6 +197,18 @@ class Conversation
     public function setLastUpdate(\DateTimeImmutable $lastUpdate): static
     {
         $this->lastUpdate = $lastUpdate;
+
+        return $this;
+    }
+
+    public function getContext(): ?string
+    {
+        return $this->context;
+    }
+
+    public function setContext(?string $context): static
+    {
+        $this->context = $context;
 
         return $this;
     }

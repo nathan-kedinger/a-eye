@@ -68,18 +68,17 @@ const handleCreateOrUpdateNewRob = async () => {
   //TODO Gérer correctement la logique de création et de mise à jour d'un rob
   if(isRobSelected.value) {
     if (selectedRob.value){
-
-      console.log('update rob')
       newRob.value = {
         id: selectedRob.value.id,
         name: newRobName.value ? newRobName.value : selectedRob.value.name,
         description: newRobDescription.value ? newRobDescription.value : selectedRob.value.description
       }
       await patchRob(newRob.value)
+      isRobSelected.value = false
+      selectedRob.value = {}
     }
   }
   else {
-    console.log('create rob')
     newRob.value = {
       name: newRobName.value,
       description: newRobDescription.value
@@ -91,6 +90,10 @@ const handleCreateOrUpdateNewRob = async () => {
         rob: newRob.value["@id"]
       })
     })
+    isRobSelected.value = false
+    selectedRob.value = undefined
+    newRobName.value = null
+    newRobDescription.value = null
   }
 
 
